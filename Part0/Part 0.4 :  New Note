@@ -1,0 +1,24 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+server->browser: server saves DATA in data.json and url redirect to '/example/notes'
+
+note over browser: 
+after DATA save browser requests a URL redirects to location: '/exampleapp/notes' 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server->browser: HTML CODE
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server->browser: main.js
+
+note over browser: 
+browser executes js-code which requests data.json file from the server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server->browser: data.json
+
+note over browser:
+browser executes the event handler that renders notes on screen
+end note
