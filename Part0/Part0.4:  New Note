@@ -1,3 +1,5 @@
+title New Note
+
 browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
 server->browser: server saves DATA in data.json and url redirect to '/example/notes'
 
