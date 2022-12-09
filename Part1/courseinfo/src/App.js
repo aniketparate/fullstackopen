@@ -32,6 +32,8 @@ const Total = (props) => {
   )
 }
 
+// Direct changes had already made according to exercise 1.3 - 1.5
+
 const App = () => {
   const course = {
     name : 'Half Stack application development',
