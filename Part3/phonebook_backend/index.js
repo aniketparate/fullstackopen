@@ -1,4 +1,6 @@
 const express = require("express");
+var morgan = require("morgan");
+
 const app = express();
 
 app.use(express.json());
@@ -25,6 +27,21 @@ let person = [
     number: "39-23-6423122",
   },
 ];
+
+const middleware = morgan((tokens, req, res) => {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, "content-length"),
+    "-",
+    tokens["response-time"](req, res),
+    "ms",
+    JSON.stringify(req.body),
+  ].join(" ");
+});
+
+app.use(middleware);
 
 app.get("/", (request, response) => {
   response.send("<h1>Server working on root</h1>");
@@ -62,7 +79,6 @@ app.delete("/api/persons/:id", (request, response) => {
 
 app.post("/api/persons", (request, response) => {
   const alreadyExist = person.find((per) => per.name === request.body.name);
-  console.log(alreadyExist);
 
   if (!request.body.name || !request.body.number) {
     return response.status(400).json({
