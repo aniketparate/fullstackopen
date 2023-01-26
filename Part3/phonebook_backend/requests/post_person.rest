@@ -5,3 +5,12 @@ Content-Type: application/json
     "name": "Aniket Parate",
     "number": "9345953487"
 }
+
+###
+POST https://phonebook-backend-54yo.onrender.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "Aniket Parate",
+    "number": "9345953487"
+}
