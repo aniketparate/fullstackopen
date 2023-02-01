@@ -63,7 +63,13 @@ const App = () => {
             setNotification(null);
           }, 5000);
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => {
+          setNotification({
+            message: `${error.response.data.error}`,
+            type: "unsuccessfull",
+          });
+          console.warn(error.response.data.error);
+        });
     }
   };
 
