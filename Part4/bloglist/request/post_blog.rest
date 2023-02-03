@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T Kiyosaki",
+    "url": "www.books.com",
+    "likes": 0
+}
