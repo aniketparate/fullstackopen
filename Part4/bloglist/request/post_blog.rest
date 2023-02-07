@@ -7,3 +7,14 @@ Content-Type: application/json
     "url": "www.books.com",
     "likes": 0
 }
+
+###
+PUT http://localhost:3003/api/blogs/63e1cbd04114909ac3637bc0
+Content-Type: application/json
+
+{
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T Kiyosaki",
+    "url": "www.books.com",
+    "likes": 5
+}

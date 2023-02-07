@@ -86,6 +86,40 @@ test('check for missing title and author', async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlog.length)
 })
 
+test('deleting a single blog post', async () => {
+  const blogs = await helper.blogInDb()
+  const blogToDelete = blogs[0]
+
+  await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204)
+
+  const blogsAtEnd = await helper.blogInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlog.length - 1)
+
+  const titles = blogsAtEnd.map((blog) => blog.title)
+  expect(titles).not.toContain(blogToDelete.title)
+})
+
+test('updating information of an individual blog post', async () => {
+  const blogs = await helper.blogInDb()
+  const blogToUpdate = blogs[0]
+
+  const blogObject = {
+    title: blogToUpdate.title,
+    author: blogToUpdate.author,
+    url: blogToUpdate.url,
+    likes: 5,
+  }
+
+  await api
+    .put(`/api/blogs/${blogToUpdate.id}`)
+    .send(blogObject)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogInDb()
+  expect(blogsAtEnd[0].likes).toBe(5)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
